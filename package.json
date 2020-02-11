@@ -10,7 +10,7 @@
     "test_setup": "bash setup-etherlime-tests.sh",
     "test": "yarn etherlime test --timeout=500000",
     "coverage": "yarn etherlime coverage",
-    "deploy": "yarn etherlime deploy ./deployment/deploy_v130.js --compile=true",
+    "deploy": "yarn etherlime deploy ./deployment/deploy_multisig.js --compile=true",
     "format": "yarn prettier -c 'test/**/*.js' -c 'deployment/**/*.js' --config .prettierrc"
   },
   "dependencies": {

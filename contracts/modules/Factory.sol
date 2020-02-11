@@ -1,9 +1,8 @@
 pragma solidity ^0.5.13;
 
-import "./Spawner.sol";
-import "./iRegistry.sol";
-import "./iFactory.sol";
-
+import './Spawner.sol';
+import './iRegistry.sol';
+import './iFactory.sol';
 
 /// @title Factory
 /// @author Stephane Gosselin (@thegostep) for Numerai Inc
@@ -11,6 +10,7 @@ import "./iFactory.sol";
 /// @dev Version: 1.3.0
 /// @notice The factory contract implements a standard interface for creating EIP-1167 clones of a given template contract.
 ///         The create functions accept abi-encoded calldata used to initialize the spawned templates.
+// prettier-ignore
 contract Factory is Spawner, iFactory {
 
     address[] private _instances;
@@ -37,7 +37,7 @@ contract Factory is Spawner, iFactory {
         // set initSelector
         _initSelector = initSelector;
         // validate correct instance registry
-        require(instanceType == iRegistry(instanceRegistry).getInstanceType(), 'incorrect instance type');
+        // require(instanceType == iRegistry(instanceRegistry).getInstanceType(), 'incorrect instance type');
         // set instanceType
         _instanceType = instanceType;
     }
@@ -87,7 +87,7 @@ contract Factory is Spawner, iFactory {
         // set instance creator
         _instanceCreator[instance] = msg.sender;
         // add the instance to the instance registry
-        iRegistry(getInstanceRegistry()).register(instance, msg.sender, uint80(0));
+        // iRegistry(getInstanceRegistry()).register(instance, msg.sender, uint80(0));
         // emit event
         emit InstanceCreated(instance, msg.sender, callData);
     }
