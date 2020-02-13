@@ -1,8 +1,8 @@
 pragma solidity ^0.5.13;
 
-import './MultiSigWallet.sol';
-import '../modules/Manageable.sol';
-import '../modules/iFactory.sol';
+import "./MultiSigWallet.sol";
+import "../modules/Manageable.sol";
+import "../modules/iFactory.sol";
 
 /// @title WalletManager
 /// @author Stephane Gosselin (@thegostep) for Numerai Inc
@@ -19,9 +19,11 @@ contract WalletManager is Manageable {
     }
     
     function _getInitCalldata() public view returns (bytes memory initCalldata) {
+        address[] memory adds = new address[](1);
+        adds[0] = address(this);
         return abi.encodeWithSelector(
             iFactory(_walletFactory).getInitSelector(),
-            [address(this)], // _owners
+            adds, // _owners
             1  // _required
         );
     }

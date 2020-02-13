@@ -47,48 +47,10 @@ const deploy = async (network, secret) => {
     wallet_manager_artifact,
     false,
     multisig_factory.contractAddress,
-    // MULTISIG_FACTORY_ADDRESS[network],
   )
 
-  const MULTISIG_ABI = multisig_template_artifact.abi
-  const walletInterface = new ethers.utils.Interface(MULTISIG_ABI)
-  const calldata = walletInterface.functions.initialize.encode([
-    ['0x474C80E1e6Bfd3283c9F31979AAc920A0F89a7AA'],
-    1,
-  ])
-  console.log('calldata', calldata)
-
-  const createdirect = await multisig_factory.create(calldata)
-  console.log('createdirect', createdirect)
-
-  const _getInitCalldata = await wallet_manager._getInitCalldata()
-  console.log('_getInitCalldata', _getInitCalldata)
-
-  console.log(
-    'decoded',
-    ethers.utils.defaultAbiCoder.decode(
-      ['address[]', 'uint256'],
-      ethers.utils.hexDataSlice(_getInitCalldata, 4),
-    ),
-  )
-
-  const create = await wallet_manager.create()
-  await create.wait(2)
-  console.log('create', create)
-
-  // await wallet_manager
-  //   .getSaltyInstance(ethers.utils.id('userID'))
-  //   .then(console.log)
-  // const createSalty = await (
-  //   await wallet_manager.createSalty(ethers.utils.id('userID'))
-  // ).wait(2)
-  // console.log('createSalty', createSalty)
-  // await wallet_manager
-  //   .getSaltyInstance(ethers.utils.id('userID'))
-  //   .then(console.log)
-
-  // console.log('multisig_template', multisig_template.contractAddress)
-  // console.log('multisig_factory', multisig_factory.contractAddress)
+  console.log('multisig_template', multisig_template.contractAddress)
+  console.log('multisig_factory', multisig_factory.contractAddress)
   console.log('wallet_manager', wallet_manager.contractAddress)
 }
 
