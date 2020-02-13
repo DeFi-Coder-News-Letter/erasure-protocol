@@ -47,7 +47,24 @@ const deploy = async (network, secret) => {
     wallet_manager_artifact,
     false,
     multisig_factory.contractAddress,
+    // MULTISIG_FACTORY_ADDRESS[network],
   )
+
+  const createtx = await wallet_manager.create()
+  await createtx.wait(2)
+
+  const createsaltytx = await wallet_manager.createSalty(
+    ethers.utils.id('asdf'),
+  )
+  await createsaltytx.wait(2)
+
+  // Transfer ownership
+
+  const owner = '0x6087555A70E2F96B7838806e7743041E035a37e5'
+  const manager = '0xf1Cf406c88752d8Eb9FB48B44Fb9C48e479A7b37'
+
+  await wallet_manager.transferManagement(manager)
+  await wallet_manager.transferOwnership(owner)
 
   console.log('multisig_template', multisig_template.contractAddress)
   console.log('multisig_factory', multisig_factory.contractAddress)
